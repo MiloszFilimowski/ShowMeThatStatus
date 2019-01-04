@@ -33,13 +33,13 @@ open class SMTSAction: NSObject {
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(performActionBlock),
                           for: .touchUpInside)
-        button.setTitle(title, for: UIControlState())
+        button.setTitle(title, for: UIControl.State())
         
         button.titleLabel?.font = type == .default ?
             SMTSConstants.smtsStyle.defaultButtonFont : SMTSConstants.smtsStyle.cancelButtonFont
         button.setTitleColor(type == .default ?
             SMTSConstants.smtsStyle.defaultButtonTextColor : SMTSConstants.smtsStyle.cancelButtonTextColor,
-                              for: UIControlState())
+                              for: UIControl.State())
         button.backgroundColor = type == .default ?
             SMTSConstants.smtsStyle.defaultButtonBackgroundColor :
             SMTSConstants.smtsStyle.cancelButtonBackgroundColor
@@ -51,7 +51,7 @@ open class SMTSAction: NSObject {
         
     }
     
-    func performActionBlock() {
+    @objc func performActionBlock() {
         
         actionBlock()
         

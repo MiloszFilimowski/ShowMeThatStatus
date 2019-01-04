@@ -128,7 +128,7 @@ open class StatusIndicator: UIView, CAAnimationDelegate {
         let animation = CABasicAnimation(keyPath: "transform.rotation")
         animation.duration = 4.0
         animation.fromValue = 0.0
-        animation.toValue = 2 * M_PI
+        animation.toValue = 2 * Double.pi
         animation.repeatCount = Float.infinity
         progressLayer.add(animation, forKey: SMTSConstants.ringRotationAnimationKey)
         
@@ -203,7 +203,7 @@ open class StatusIndicator: UIView, CAAnimationDelegate {
         
         shapeLayer.strokeEnd = 1.0
         shapeLayer.strokeStart = strokeStart
-        let timeFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        let timeFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         
         let headStartAnimation = CABasicAnimation(keyPath: "strokeStart")
         headStartAnimation.fromValue = 0.0
@@ -285,8 +285,8 @@ open class StatusIndicator: UIView, CAAnimationDelegate {
         shapeLayer.strokeColor = strokeColor.cgColor
         shapeLayer.fillColor = nil
         shapeLayer.lineWidth = lineWidth
-        shapeLayer.lineCap = kCALineCapRound
-        shapeLayer.lineJoin = kCALineJoinRound
+        shapeLayer.lineCap = CAShapeLayerLineCap.round
+        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
         shapeLayer.strokeStart = 0.0
         shapeLayer.strokeEnd = 0.0
         self.layer.addSublayer(shapeLayer)
@@ -294,14 +294,14 @@ open class StatusIndicator: UIView, CAAnimationDelegate {
         NotificationCenter.default
             .addObserver(self,
                          selector:#selector(StatusIndicator.resetAnimations),
-                         name: NSNotification.Name.UIApplicationDidBecomeActive,
+                         name: UIApplication.didBecomeActiveNotification,
                          object: nil)
     }
     
     fileprivate func setProgressLayerPath() {
         let center = CGPoint(x: self.bounds.midX, y: self.bounds.midY)
         let radius = (min(self.bounds.width, self.bounds.height) - progressLayer.lineWidth) / 2
-        let path = UIBezierPath(arcCenter: center, radius: radius, startAngle: CGFloat(0.0), endAngle: CGFloat(2 * M_PI), clockwise: true)
+        let path = UIBezierPath(arcCenter: center, radius: radius, startAngle: CGFloat(0.0), endAngle: CGFloat(2 * Double.pi), clockwise: true)
         progressLayer.path = path.cgPath
         progressLayer.strokeStart = 0.0
         progressLayer.strokeEnd = 0.0

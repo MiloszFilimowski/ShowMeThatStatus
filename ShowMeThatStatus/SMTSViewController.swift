@@ -131,7 +131,7 @@ open class SMTSViewController: UIViewController {
         let size: CGSize = statusMessage
             .boundingRect(with: CGSize(width: style.width - 20, height: 2000),
                                   options:NSStringDrawingOptions.usesLineFragmentOrigin,
-                                  attributes: [NSFontAttributeName: style.statusFont],
+                                  attributes: [NSAttributedString.Key.font: style.statusFont],
                                   context: nil).size as CGSize
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.5,
